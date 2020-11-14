@@ -4,7 +4,8 @@ const {
   user: User,
   workout: Workout,
   exercise: Exercise,
-} = require("../models/").user;
+  userToWorkout: UserToWorkout,
+} = require("../models");
 
 const router = new Router();
 
@@ -21,22 +22,9 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/test/:workoutId", async (req, res, next) => {
-  const id = req.params.workoutId;
-  try {
-    const workout = await Workout.findByPk(id);
-    if (!workout) {
-      res.status(404).send("Exercise not found");
-      return;
-    }
-    res.send(workout);
-  } catch (e) {
-    next(e);
-  }
-});
-
 router.get("/:userId", async (req, res, next) => {
   const id = req.params.userId;
+  console.log(id);
   try {
     const workouts = await UserToWorkout.findAll({
       where: { userId: id },

@@ -4,7 +4,8 @@ const {
   user: User,
   workout: Workout,
   exercise: Exercise,
-} = require("../models/").user;
+  workoutToExercise: WorkoutToExercise,
+} = require("../models");
 
 const router = new Router();
 

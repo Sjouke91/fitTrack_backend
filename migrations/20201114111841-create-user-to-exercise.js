@@ -26,6 +26,10 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
+      kg: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       sets: {
         type: Sequelize.INTEGER,
         allowNull: false,

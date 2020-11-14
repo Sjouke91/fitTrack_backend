@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       userId: DataTypes.INTEGER,
       exerciseId: DataTypes.INTEGER,
+      kg: { type: DataTypes.INTEGER, allowNull: false },
       sets: { type: DataTypes.INTEGER, allowNull: false },
       reps: { type: DataTypes.INTEGER, allowNull: false },
       RPE: { type: DataTypes.INTEGER, allowNull: false },

@@ -22,8 +22,8 @@ if (process.env.DELAY) {
 
 //Routers
 app.use("/", authRouter);
-app.use("/", exerciseRouter);
-app.use("/", workoutRouter);
+app.use("/exercises", exerciseRouter);
+app.use("/workouts", workoutRouter);
 
 // Listen for connections on specified port (default is port 4000)
 
