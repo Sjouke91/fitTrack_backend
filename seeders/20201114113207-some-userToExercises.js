@@ -8,6 +8,7 @@ module.exports = {
         {
           userId: 1,
           exerciseId: 2,
+          workoutId: 2,
           kg: 50,
           sets: 4,
           reps: 10,
@@ -19,6 +20,7 @@ module.exports = {
         {
           userId: 1,
           exerciseId: 4,
+          workoutId: 2,
           kg: 20,
           sets: 5,
           reps: 8,
@@ -30,6 +32,7 @@ module.exports = {
         {
           userId: 3,
           exerciseId: 5,
+          workoutId: 2,
           kg: 15,
           sets: 5,
           reps: 7,
@@ -41,6 +44,7 @@ module.exports = {
         {
           userId: 5,
           exerciseId: 4,
+          workoutId: 2,
           kg: 90,
           sets: 4,
           reps: 10,
@@ -52,6 +56,7 @@ module.exports = {
         {
           userId: 3,
           exerciseId: 3,
+          workoutId: 2,
           kg: 30,
           sets: 4,
           reps: 10,
