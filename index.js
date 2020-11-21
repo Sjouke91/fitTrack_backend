@@ -26,7 +26,6 @@ app.use("/exercises", exerciseRouter);
 app.use("/workouts", workoutRouter);
 
 // Listen for connections on specified port (default is port 4000)
-
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });

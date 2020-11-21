@@ -11,3 +11,84 @@ npx sequelize-cli seed:generate --name some-workoutToExercises
 http -v POST :4001/exercises/5 reps=9 sets=5 weight=8 RPE=5 Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTYwNTQzMDEyMCwiZXhwIjoxNjA1NDM3MzIwfQ.zf7gnYSO4XtrbjlIPYS3rKBGRImLONhRKqMncP7N_us"
 
 http -v :4001/exercises/3 Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTYwNTQzNzgwNCwiZXhwIjoxNjA1NDQ1MDA0fQ.3_T6jhbwt1fKuUxDrtr7X9LvCvXP6CRflGvCsmzVcrg"
+
+"use strict";
+const exercises = "./exercises.csv";
+const csv = require("csvtojson");
+
+csv()
+.fromFile(exercises)
+.then((jsonObj) => {
+console.log(jsonObj);
+});
+
+module.exports = {
+up: async (queryInterface, Sequelize) => {
+const jsonArray = await csv().fromFile(exercises);
+if (jsonArray) {
+const exerciseArray = jsonArray.map((e) => {
+return {
+name: e.exercise,
+muscleGroup: e.muscleGroup,
+createdAt: new Date(),
+updatedAt: new Date(),
+};
+});
+
+    }
+    await queryInterface.bulkInsert("exercises", exerciseArray, {});
+
+},
+
+down: async (queryInterface, Sequelize) => {
+await queryInterface.bulkDelete("exercises", null, {});
+},
+};
+
+OLD:
+"use strict";
+
+module.exports = {
+up: async (queryInterface, Sequelize) => {
+await queryInterface.bulkInsert(
+"exercises",
+[
+{
+name: "Bench Press",
+muscleGroup: "Chest",
+createdAt: new Date(),
+updatedAt: new Date(),
+},
+{
+name: "Pull up",
+muscleGroup: "Traps",
+createdAt: new Date(),
+updatedAt: new Date(),
+},
+{
+name: "Shoulder press",
+muscleGroup: "Shoulders",
+createdAt: new Date(),
+updatedAt: new Date(),
+},
+{
+name: "Squat",
+muscleGroup: "Legs",
+createdAt: new Date(),
+updatedAt: new Date(),
+},
+{
+name: "Bicep curl",
+muscleGroup: "Biceps",
+createdAt: new Date(),
+updatedAt: new Date(),
+},
+],
+{}
+);
+},
+
+down: async (queryInterface, Sequelize) => {
+await queryInterface.bulkDelete("exercises", null, {});
+},
+};

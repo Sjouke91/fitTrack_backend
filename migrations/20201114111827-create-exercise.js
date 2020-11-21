@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      type: {
+      muscleGroup: {
         type: Sequelize.STRING,
       },
       createdAt: {
