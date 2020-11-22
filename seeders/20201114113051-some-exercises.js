@@ -1,6 +1,5 @@
 "use strict";
 const exerciseArray = require("../data/dataModeling.js").exercises;
-console.log(exerciseArray);
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {

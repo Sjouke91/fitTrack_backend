@@ -1,4 +1,12 @@
-const data = require("./exercises");
+const fromJson = require("./exercises");
+
+const data = fromJson.map((e) => {
+  const res = Object.entries(e).reduce(
+    (a, [k, v]) => ((a[k] = v.slice(1)), a),
+    {}
+  );
+  return res;
+});
 
 const allMusclesArray = data.map((e) => {
   return e.muscleGroup;
@@ -12,6 +20,7 @@ const muscleGroupArray = muscleArray.map((e, i) => {
 
 const exerciseArray = data.map((e) => {
   const muscle = muscleGroupArray.find((m) => m.name === e.muscleGroup);
+
   delete e.muscleGroup;
   return {
     ...e,
