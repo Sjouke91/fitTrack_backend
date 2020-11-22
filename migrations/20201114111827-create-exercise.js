@@ -11,8 +11,14 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      muscleGroup: {
-        type: Sequelize.STRING,
+      muscleId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "muscleGroups",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       createdAt: {
         allowNull: false,

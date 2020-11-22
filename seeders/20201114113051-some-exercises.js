@@ -1,14 +1,6 @@
 "use strict";
-const data = require("../data/exercises.json");
-
-const exerciseArray = data.map((e) => {
-  return {
-    name: e.exercise,
-    muscleGroup: e.muscleGroup,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-});
+const exerciseArray = require("../data/dataModeling.js").exercises;
+console.log(exerciseArray);
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {

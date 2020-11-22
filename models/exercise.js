@@ -16,12 +16,13 @@ module.exports = (sequelize, DataTypes) => {
         through: "workoutToExercise",
         foreignKey: "exerciseId",
       });
+      exercise.hasOne(model.muscleGroup);
     }
   }
   exercise.init(
     {
       name: DataTypes.STRING,
-      type: DataTypes.STRING,
+      muscleId: DataTypes.INTEGER,
     },
     {
       sequelize,
