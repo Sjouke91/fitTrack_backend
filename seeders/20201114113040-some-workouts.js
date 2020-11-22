@@ -6,19 +6,19 @@ module.exports = {
       "workouts",
       [
         {
-          name: "Hendriks workout",
+          name: "Pull Workout",
           intensity: "Hard",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Workout of the day",
+          name: "Push Workout",
           intensity: "Easy",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "November workout",
+          name: "Cardio Workout",
           intensity: "Hard",
           createdAt: new Date(),
           updatedAt: new Date(),

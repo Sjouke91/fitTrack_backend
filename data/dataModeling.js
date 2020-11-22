@@ -1,11 +1,9 @@
 const fromJson = require("./exercises");
 
 const data = fromJson.map((e) => {
-  const res = Object.entries(e).reduce(
-    (a, [k, v]) => ((a[k] = v.slice(1)), a),
-    {}
-  );
-  return res;
+  const res = e.muscleGroup.slice(1);
+
+  return { ...e, muscleGroup: res };
 });
 
 const allMusclesArray = data.map((e) => {

@@ -13,13 +13,13 @@ module.exports = {
         },
         {
           userId: 1,
-          workoutId: 3,
+          workoutId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 2,
-          workoutId: 5,
+          userId: 1,
+          workoutId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

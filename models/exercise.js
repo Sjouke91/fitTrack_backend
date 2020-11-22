@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         through: "workoutToExercise",
         foreignKey: "exerciseId",
       });
-      exercise.hasOne(model.muscleGroup);
+      exercise.hasOne(models.muscleGroup);
     }
   }
   exercise.init(

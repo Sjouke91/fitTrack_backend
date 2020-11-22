@@ -6,6 +6,7 @@ const {
   exercise: Exercise,
   workoutToExercise: WorkoutToExercise,
   userToExercise: UserToExercise,
+  muscleGroup: MuscleGroup,
 } = require("../models");
 
 const router = new Router();
@@ -30,7 +31,10 @@ router.get("/:workoutId", async (req, res, next) => {
   try {
     const exercises = await WorkoutToExercise.findAll({
       where: { workoutId: id },
-      include: [Exercise],
+      include: {
+        model: Exercise,
+        attributes: ["name", "muscleId"],
+      },
     });
     if (!exercises) {
       res.status(404).send("exercises not found");
