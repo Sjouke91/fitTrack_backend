@@ -25,7 +25,7 @@ router.post("/login", async (req, res, next) => {
       });
     }
 
-    delete user.dataValues["password"];
+    delete user.dataValues[("password", "createdAt", "updatedAt")];
     const token = toJWT({ userId: user.id });
     return res.status(200).send({ token, ...user.dataValues });
   } catch (error) {
@@ -47,7 +47,7 @@ router.post("/signup", async (req, res) => {
       name,
     });
 
-    delete newUser.dataValues["password"];
+    delete newUser.dataValues[("password", "createdAt", "updatedAt")];
 
     const token = toJWT({ userId: newUser.id });
 
@@ -64,7 +64,7 @@ router.post("/signup", async (req, res) => {
 });
 
 router.get("/me", authMiddleware, async (req, res) => {
-  delete req.user.dataValues["password"];
+  delete req.user.dataValues[("password", "createdAt", "updatedAt")];
   res.status(200).send({ ...req.user.dataValues });
 });
 
