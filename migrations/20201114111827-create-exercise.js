@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      muscleId: {
+      muscleGroupId: {
         type: Sequelize.INTEGER,
         references: {
           model: "muscleGroups",

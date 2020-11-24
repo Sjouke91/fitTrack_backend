@@ -22,7 +22,7 @@ const exerciseArray = data.map((e) => {
   delete e.muscleGroup;
   return {
     ...e,
-    muscleId: muscle.id,
+    muscleGroupId: muscle.id,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
