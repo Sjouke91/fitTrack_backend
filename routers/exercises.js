@@ -11,6 +11,27 @@ const {
 
 const router = new Router();
 
+//search exercises by muscleGroup
+router.get("/search/", async (req, res, next) => {
+  const muscleGroupId = req.query.muscleGroupId;
+  if (!muscleGroupId) {
+    res.status(400).send({ message: "Please select a muscle group" });
+  }
+  try {
+    const exercises = await Exercise.findAll({
+      where: { muscleGroupId: muscleGroupId },
+      attributes: ["name", "id"],
+      include: { model: MuscleGroup, attributes: ["name", "id"] },
+    });
+    if (!exercises) {
+      res.status(404).send("No exercises found");
+    }
+    res.send(exercises);
+  } catch (e) {
+    next(e);
+  }
+});
+
 //get all exercises
 router.get("/", async (req, res, next) => {
   const limit = Math.min(req.query.limit || 10, 50);
