@@ -31,9 +31,10 @@ router.get("/:workoutId", async (req, res, next) => {
   try {
     const exercises = await WorkoutToExercise.findAll({
       where: { workoutId: id },
+      attributes: ["exerciseId", "workoutId"],
       include: {
         model: Exercise,
-        attributes: ["name", "muscleId"],
+        attributes: ["id", "name", "muscleId"],
       },
     });
     if (!exercises) {
