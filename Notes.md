@@ -92,3 +92,5 @@ down: async (queryInterface, Sequelize) => {
 await queryInterface.bulkDelete("exercises", null, {});
 },
 };
+
+http -v POST :4001/workouts name="test workout 2" Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYwNjMwMzk1MiwiZXhwIjoxNjA2MzExMTUyfQ.MMAOSxOGuIojytXptR8hgEADTmNmDnJvy7ncrP4T0gk"

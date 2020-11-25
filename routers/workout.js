@@ -5,6 +5,7 @@ const {
   workout: Workout,
   exercise: Exercise,
   userToWorkout: UserToWorkout,
+  workoutToExercise: WorkoutToExercise,
 } = require("../models");
 
 const router = new Router();
@@ -40,15 +41,33 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
-  const { name, intensity } = await req.body;
-  if (!name || !intensity) {
+router.post("/", authMiddleware, async (req, res, next) => {
+  const { workoutName, intensity, exerciseArray } = await req.body;
+  const userId = req.user.dataValues.id;
+
+  console.log("THIS IS INCOMMING", workoutName, exerciseArray);
+
+  if (!workoutName || !exerciseArray) {
     res.status(400).send("missing credentials");
     return;
   }
   try {
-    const newWorkout = await Workout.create({ name, intensity });
+    const newWorkout = await Workout.create({ name: workoutName, intensity });
     res.json(newWorkout);
+
+    const newUserToWorkout = await UserToWorkout.create({
+      workoutId: newWorkout.id,
+      userId,
+    });
+
+    const newWorkoutToExercise = exerciseArray.map(async (e) => {
+      const newWorkoutToExercise = await WorkoutToExercise.create({
+        userId,
+        workoutId: newWorkout.id,
+        exerciseId: e,
+      });
+      return newWorkoutToExercise;
+    });
   } catch (e) {
     res.status(400).json(e.name);
     next(e);
