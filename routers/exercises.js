@@ -14,25 +14,74 @@ const router = new Router();
 //search exercises by muscleGroup
 router.get("/search/", async (req, res, next) => {
   const muscleGroupId = req.query.muscleGroupId;
-  if (!muscleGroupId) {
-    res.status(400).send({ message: "Please select a muscle group" });
+  const exerciseName = req.query.exerciseName;
+  console.log(muscleGroupId, exerciseName);
+  if (!muscleGroupId && !exerciseName) {
+    res
+      .status(400)
+      .send({ message: "Please select a muscle group or try search by name" });
   }
   try {
-    const exercises = await Exercise.findAll({
-      where: { muscleGroupId: muscleGroupId },
-      attributes: ["name", "id"],
-      include: { model: MuscleGroup, attributes: ["name", "id"] },
-    });
-    if (!exercises) {
-      res.status(404).send("No exercises found");
+    if (exerciseName && muscleGroupId) {
+      const allExercises = await Exercise.findAll({
+        attributes: ["name", "id"],
+        include: { model: MuscleGroup, attributes: ["name", "id"] },
+      });
+
+      const exerciseByName = allExercises.filter((ae) => {
+        const exercise = ae.get({ plain: true });
+        return exercise.name.includes(exerciseName);
+      });
+
+      if (!exerciseByName) {
+        res.status(404).send({ message: "No exercises found by name" });
+      }
+
+      const exercises = exerciseByName.filter((e) => {
+        return e.muscleGroup.dataValues.id === parseInt(muscleGroupId);
+      });
+
+      if (exercises === []) {
+        res
+          .status(404)
+          .send({ message: "No exercises found by name and muscle group" });
+      }
+
+      res.send(exercises);
+      return;
     }
-    res.send(exercises);
+    if (exerciseName && !muscleGroupId) {
+      const allExercises = await Exercise.findAll({
+        attributes: ["name", "id"],
+        include: { model: MuscleGroup, attributes: ["name", "id"] },
+      });
+      const exercises = allExercises.filter((ae) => {
+        const exercise = ae.get({ plain: true });
+        return exercise.name.includes(exerciseName);
+      });
+      if (!exercises) {
+        res.status(404).send("No exercises found");
+      }
+      res.send(exercises);
+      return;
+    }
+    if (muscleGroupId) {
+      const exercises = await Exercise.findAll({
+        where: { muscleGroupId: muscleGroupId },
+        attributes: ["name", "id"],
+        include: { model: MuscleGroup, attributes: ["name", "id"] },
+      });
+      if (!exercises) {
+        res.status(404).send("No exercises found");
+      }
+      res.send(exercises);
+      return;
+    }
   } catch (e) {
     next(e);
   }
 });
 
-//get all exercises
 router.get("/", async (req, res, next) => {
   const limit = Math.min(req.query.limit || 10, 50);
   const offset = req.query.offset || 0;
