@@ -162,12 +162,13 @@ router.post("/:exerciseId", authMiddleware, async (req, res, next) => {
   const exerciseId = req.params.exerciseId;
   const userId = req.user.id;
   const date = new Date();
-  const { workoutId, reps, sets, kg, RPE } = req.body;
+  const { workoutStart, workoutId, reps, sets, kg, RPE } = req.body;
   if (!exerciseId || !workoutId || !userId || !reps || !sets || !kg || !RPE) {
     res.status(400).send({ message: "Please fill in all input fields" });
   }
   try {
     const finishExercise = await UserToExercise.create({
+      workoutStart,
       userId,
       exerciseId,
       workoutId,
