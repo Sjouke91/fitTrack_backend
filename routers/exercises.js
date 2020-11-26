@@ -97,7 +97,16 @@ router.get("/", authMiddleware, async (req, res, next) => {
         "workoutStart",
         "createdAt",
       ],
-      include: { model: Workout, attributes: ["name", "id"] },
+      include: [
+        {
+          model: Workout,
+          attributes: ["name", "id"],
+        },
+        {
+          model: Exercise,
+          attributes: ["name", "id"],
+        },
+      ],
     });
     if (!exercises) {
       res.status(404).send("Exercises not found");
