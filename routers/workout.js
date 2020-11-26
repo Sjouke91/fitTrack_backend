@@ -10,6 +10,7 @@ const {
 
 const router = new Router();
 
+//Get all workouts
 router.get("/", async (req, res, next) => {
   try {
     const workouts = await Workout.findAll();
@@ -23,12 +24,12 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+//Get all workouts from user
 router.get("/:userId", async (req, res, next) => {
-  const id = req.params.userId;
-  console.log(id);
+  const userId = req.params.userId;
   try {
     const workouts = await UserToWorkout.findAll({
-      where: { userId: id },
+      where: { userId },
       include: [Workout],
     });
     if (!workouts) {
@@ -41,12 +42,10 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
+//Create a new workout
 router.post("/", authMiddleware, async (req, res, next) => {
   const { workoutName, intensity, exerciseArray } = await req.body;
   const userId = req.user.dataValues.id;
-
-  console.log("THIS IS INCOMMING", workoutName, exerciseArray);
-
   if (!workoutName || !exerciseArray) {
     res.status(400).send("missing credentials");
     return;
@@ -70,6 +69,17 @@ router.post("/", authMiddleware, async (req, res, next) => {
     });
   } catch (e) {
     res.status(400).json(e.name);
+    next(e);
+  }
+});
+
+//Delete workout
+router.delete("/:workoutId", async (req, res, next) => {
+  const workoutId = req.params.workoutId;
+  try {
+    const deletedWorkout = await Workout.destroy({ where: { id: workoutId } });
+    res.status(200).send(deletedWorkout);
+  } catch (e) {
     next(e);
   }
 });
