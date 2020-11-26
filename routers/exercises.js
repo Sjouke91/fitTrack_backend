@@ -82,15 +82,22 @@ router.get("/search/", async (req, res, next) => {
   }
 });
 
-router.get("/", async (req, res, next) => {
-  const limit = Math.min(req.query.limit || 10, 50);
-  const offset = req.query.offset || 0;
+//get all exercises for calender
+router.get("/", authMiddleware, async (req, res, next) => {
+  const userId = req.user.id;
   try {
-    const exercises = await Exercise.findAll({
-      limit,
-      offset,
-      attributes: ["id", "name"],
-      include: { model: MuscleGroup, attributes: ["name", "id"] },
+    const exercises = await UserToExercise.findAll({
+      where: { userId },
+      attributes: [
+        "id",
+        "kg",
+        "sets",
+        "reps",
+        "RPE",
+        "workoutStart",
+        "createdAt",
+      ],
+      include: { model: Workout, attributes: ["name", "id"] },
     });
     if (!exercises) {
       res.status(404).send("Exercises not found");

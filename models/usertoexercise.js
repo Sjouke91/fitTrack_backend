@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       sets: { type: DataTypes.INTEGER, allowNull: false },
       reps: { type: DataTypes.INTEGER, allowNull: false },
       RPE: { type: DataTypes.INTEGER, allowNull: false },
-      date: { type: DataTypes.DATEONLY, allowNull: false },
+      workoutStart: { type: DataTypes.DATE, allowNull: false },
     },
     {
       sequelize,
