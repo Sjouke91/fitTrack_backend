@@ -74,11 +74,13 @@ router.post("/", authMiddleware, async (req, res, next) => {
 });
 
 //Delete workout
-router.delete("/:workoutId", async (req, res, next) => {
+router.delete("/:workoutId", authMiddleware, async (req, res, next) => {
   const workoutId = req.params.workoutId;
   try {
-    const deletedWorkout = await Workout.destroy({ where: { id: workoutId } });
-    res.status(200).send(deletedWorkout);
+    const deletedWorkout = await UserToWorkout.destroy({
+      where: { workoutId },
+    });
+    res.send("succes");
   } catch (e) {
     next(e);
   }
