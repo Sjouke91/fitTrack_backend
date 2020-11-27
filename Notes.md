@@ -117,3 +117,8 @@ http -v :4001/exercises Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVC
     </tr>
   </tbody>
 </Table>
+
+/node_modules/sequelize/lib/sequelize.js:187:28
+
+185
+const urlParts = url.parse(arguments[0], true);
