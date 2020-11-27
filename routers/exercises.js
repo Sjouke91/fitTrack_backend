@@ -91,6 +91,7 @@ router.get("/", authMiddleware, async (req, res, next) => {
       attributes: [
         "id",
         "kg",
+        "exerciseId",
         "sets",
         "reps",
         "RPE",
