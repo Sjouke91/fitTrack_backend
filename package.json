@@ -19,7 +19,7 @@
     "jwt",
     "sequelize"
   ],
-  "author": "Rein Op 't Land",
+  "author": "Sjouke Bosma",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",

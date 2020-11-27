@@ -6,7 +6,6 @@ const authRouter = require("./routers/auth");
 const exerciseRouter = require("./routers/exercises");
 const workoutRouter = require("./routers/workout");
 const muscleGroupRouter = require("./routers/muscleGroups");
-const authMiddleWare = require("./auth/middleware");
 
 const app = express();
 

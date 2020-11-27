@@ -23,3 +23,13 @@
 | GET | '/:userId/workouts/:id' | Get one workout of user | userId, workoutId | no |
 | GET | '/:userId/exercises/:exId' | Get all exercise logs of 1 ex. of user | userId, exerId | no |
 | POST | '/:userId/exercises/:exId' | Create new ex. log | userId, exerID | no |
+
+// "production": {
+// "username": "root",
+// "password": null,
+// "database": "database_production",
+// "host": "127.0.0.1",
+// "dialect": "postgres",
+// "operatorsAliases": "0",
+// "use_env_variable": "DATABASE_URL"
+// }
