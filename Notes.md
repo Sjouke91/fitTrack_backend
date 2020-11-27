@@ -92,3 +92,28 @@ down: async (queryInterface, Sequelize) => {
 await queryInterface.bulkDelete("exercises", null, {});
 },
 };
+
+http -v :4001/exercises Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYwNjM5OTE5MiwiZXhwIjoxNjA2NDA2MzkyfQ.5lxhVrEFHFunjQ56sXnDwjkAGT_WESj54MDqlM0EfQU"
+
+<Table striped bordered hover>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Weight</th>
+      <th>Sets</th>
+      <th>Reps</th>
+      <th>RPE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+  </tbody>
+</Table>

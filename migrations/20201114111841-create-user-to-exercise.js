@@ -51,9 +51,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      date: {
-        type: Sequelize.DATEONLY,
+      workoutStart: {
         allowNull: false,
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,

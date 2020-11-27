@@ -5,6 +5,7 @@ const { PORT } = require("./config/constants");
 const authRouter = require("./routers/auth");
 const exerciseRouter = require("./routers/exercises");
 const workoutRouter = require("./routers/workout");
+const muscleGroupRouter = require("./routers/muscleGroups");
 const authMiddleWare = require("./auth/middleware");
 
 const app = express();
@@ -24,6 +25,7 @@ if (process.env.DELAY) {
 app.use("/", authRouter);
 app.use("/exercises", exerciseRouter);
 app.use("/workouts", workoutRouter);
+app.use("/muscleGroups", muscleGroupRouter);
 
 // Listen for connections on specified port (default is port 4000)
 app.listen(PORT, () => {
