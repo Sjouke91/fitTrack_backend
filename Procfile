@@ -1,1 +1,1 @@
-web: npx sequelize-cli db:seed:all
+web: npm postinstall 
