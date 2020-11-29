@@ -11,6 +11,22 @@ const {
 
 const router = new Router();
 
+router.get("/", async (req, res, next) => {
+  try {
+    const muscleGroups = await Exercise.findAll({
+      attributes: ["name", "id"],
+      include: { model: MuscleGroup, attributes: ["name", "id"] },
+    });
+    if (!muscleGroups) {
+      res.status(404).send("Muscle group not found");
+      return;
+    }
+    res.send(muscleGroups);
+  } catch (e) {
+    next(e);
+  }
+});
+
 //search exercises by muscleGroup
 router.get("/search/", async (req, res, next) => {
   const muscleGroupId = req.query.muscleGroupId;
@@ -82,8 +98,8 @@ router.get("/search/", async (req, res, next) => {
   }
 });
 
-//get all exercises for calender
-router.get("/", authMiddleware, async (req, res, next) => {
+//get all exercises for calendar
+router.get("/logged", authMiddleware, async (req, res, next) => {
   const userId = req.user.id;
   try {
     const exercises = await UserToExercise.findAll({

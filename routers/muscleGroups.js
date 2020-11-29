@@ -10,6 +10,7 @@ const {
 
 const router = new Router();
 
+//get all muscle groups
 router.get("/", async (req, res, next) => {
   try {
     const muscleGroups = await MuscleGroup.findAll({
