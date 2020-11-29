@@ -13,7 +13,7 @@
     "operatorsAliases": "0"
   },
   "production": {
-    "use_env_variable": "DATABASE_URL",
+    "url": "postgres://uucgxchg:5MnZyPCKU0wD31PCnFdDIKnd8hhZCkgB@dumbo.db.elephantsql.com:5432/uucgxchg",
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": true
