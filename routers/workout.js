@@ -47,7 +47,6 @@ router.post("/:workoutId", async (req, res, next) => {
   const { workoutId } = req.params;
   const { exerciseArray } = await req.body;
 
-  console.log("THIS IS WORKOUTID", workoutId);
   if (!workoutId || !exerciseArray) {
     res.status(400).send("missing credentials");
     return;
@@ -86,6 +85,7 @@ router.delete("/:workoutId/:exerciseId", async (req, res, next) => {
     const specificWorkout = await WorkoutToExercise.destroy({
       where: [{ workoutId: workoutId }, { exerciseId: exerciseId }],
     });
+    res.status(200).json(specificWorkout);
   } catch (e) {
     res.status(400).json(e.name);
     next(e);
