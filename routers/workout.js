@@ -42,6 +42,37 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
+//Edit a workout by adding exercises
+router.post("/:workoutId", async (req, res, next) => {
+  const { workoutId } = req.params;
+  const { exerciseArray } = await req.body;
+
+  console.log("THIS IS WORKOUTID", workoutId);
+  if (!workoutId || !exerciseArray) {
+    res.status(400).send("missing credentials");
+    return;
+  }
+  try {
+    const newExercise = exerciseArray.map(async (e) => {
+      const doesExist = await WorkoutToExercise.findOne({
+        where: { exerciseId: e },
+      });
+
+      if (!doesExist) {
+        const newWorkoutToExercise = await WorkoutToExercise.create({
+          workoutId: workoutId,
+          exerciseId: e,
+        });
+        return newWorkoutToExercise;
+      }
+      return;
+    });
+  } catch (e) {
+    res.status(400).json(e.name);
+    next(e);
+  }
+});
+
 //Create a new workout
 router.post("/", authMiddleware, async (req, res, next) => {
   const { workoutName, intensity, exerciseArray } = await req.body;
