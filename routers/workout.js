@@ -73,6 +73,25 @@ router.post("/:workoutId", async (req, res, next) => {
   }
 });
 
+//Edit a workout by deleting exercises
+router.delete("/:workoutId/:exerciseId", async (req, res, next) => {
+  const { workoutId, exerciseId } = req.params;
+
+  console.log("THIS IS PARAMS", workoutId, exerciseId);
+  if (!workoutId || !exerciseId) {
+    res.status(400).send("missing credentials");
+    return;
+  }
+  try {
+    const specificWorkout = await WorkoutToExercise.destroy({
+      where: [{ workoutId: workoutId }, { exerciseId: exerciseId }],
+    });
+  } catch (e) {
+    res.status(400).json(e.name);
+    next(e);
+  }
+});
+
 //Create a new workout
 router.post("/", authMiddleware, async (req, res, next) => {
   const { workoutName, intensity, exerciseArray } = await req.body;
