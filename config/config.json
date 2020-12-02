@@ -12,7 +12,8 @@
     "operatorsAliases": "0"
   },
   "production": {
+    "url": "postgres://uucgxchg:5MnZyPCKU0wD31PCnFdDIKnd8hhZCkgB@dumbo.db.elephantsql.com:5432/uucgxchg",
     "dialect": "postgres",
-    "use_env_variable": "DATABASE_URL"
+    "operatorsAliases": "0"
   }
 }
