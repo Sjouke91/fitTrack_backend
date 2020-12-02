@@ -96,7 +96,7 @@ router.delete("/:workoutId/:exerciseId", async (req, res, next) => {
 router.post("/", authMiddleware, async (req, res, next) => {
   const { workoutName, intensity, exerciseArray } = await req.body;
   const userId = req.user.dataValues.id;
-  if (!workoutName || !exerciseArray) {
+  if (!workoutName && !exerciseArray) {
     res.status(400).send("missing credentials");
     return;
   }
@@ -118,7 +118,7 @@ router.post("/", authMiddleware, async (req, res, next) => {
       return newWorkoutToExercise;
     });
   } catch (e) {
-    res.status(400).json(e.name);
+    res.status(400).send("missing something");
     next(e);
   }
 });

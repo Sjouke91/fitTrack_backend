@@ -11,17 +11,18 @@ const {
 
 const router = new Router();
 
+// get all exercises
 router.get("/", async (req, res, next) => {
   try {
-    const muscleGroups = await Exercise.findAll({
+    const allExercises = await Exercise.findAll({
       attributes: ["name", "id"],
       include: { model: MuscleGroup, attributes: ["name", "id"] },
     });
-    if (!muscleGroups) {
-      res.status(404).send("Muscle group not found");
+    if (!allExercises) {
+      res.status(404).send("No exercises found");
       return;
     }
-    res.send(muscleGroups);
+    res.send(allExercises);
   } catch (e) {
     next(e);
   }
@@ -98,7 +99,7 @@ router.get("/search/", async (req, res, next) => {
   }
 });
 
-//get all exercises for calendar
+//get all logged exercises of user
 router.get("/logged", authMiddleware, async (req, res, next) => {
   const userId = req.user.id;
   try {
@@ -126,7 +127,7 @@ router.get("/logged", authMiddleware, async (req, res, next) => {
       ],
     });
     if (!exercises) {
-      res.status(404).send("Exercises not found");
+      res.status(404).send("No exercises found");
       return;
     }
     res.send(exercises);
@@ -135,8 +136,8 @@ router.get("/logged", authMiddleware, async (req, res, next) => {
   }
 });
 
-//get create new exercise
-router.post("/", async (req, res, next) => {
+//Create new exercise
+router.post("/", authMiddleware, async (req, res, next) => {
   const { name, type } = await req.body;
   if (!name || !type) {
     res.status(400).send("missing credentials");
