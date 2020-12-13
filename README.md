@@ -1,4 +1,4 @@
-# Hi there, thanks for visiting my FITTRACK project!
+# Hi there, thank you for visiting my FITTRACK project!
 
 ## What this app is about
 
