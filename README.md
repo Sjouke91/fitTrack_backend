@@ -1,6 +1,6 @@
 # Hi there, thank you for visiting my FITTRACK project!
 
-## What this app is about
+## What is this app is about
 
 This app is made for all the powerlifters, crossfitters and fitness addicts out there who want to track their progress. The app can be used to create and log your workouts and exercises. Compose a new workout with the 900+ exercises stored in the backend. Workout Done? Check the dashboard functionality and track your progress in easy to read graphs and tables.
 
